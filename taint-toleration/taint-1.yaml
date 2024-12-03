@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-toleration-equal
+  labels:
+    env: taint-toleration-1
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  tolerations:
+  - key: "type"
+    operator: "Equal"
+    value: "database"
+    effect: "NoSchedule"
+  nodeSelector:
+    type: db

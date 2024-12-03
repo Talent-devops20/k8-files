@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: mynginx1
+  name: mynginx1-taint-noexecute
+spec:
+  containers:
+  - image: nginx
+    name: mynginx1
+    ports:
+    - containerPort: 80
+  nodeSelector:
+    type: web

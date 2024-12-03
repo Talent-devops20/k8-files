@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-recreate
+spec:
+  replicas: 5 #number of pods which need to be created by using the same pod definition
+  strategy:
+    type: Recreate
+  selector: 
+    matchLabels:
+      type: mon # the selector label has to match with pod labels.
+  template: #here the pod definition has be defined.
+    metadata:
+      name: grafana
+      labels:
+        type: mon
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana:main
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 50m
+          limits:
+            memory: 200Mi
+            cpu: 100m

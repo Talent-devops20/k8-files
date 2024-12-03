@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-test
+spec:
+  replicas: 2 #number of pods which need to be created by using the same pod definition
+  selector: 
+    matchLabels:
+      type: monitor # the selector label has to match with pod labels.
+  template: #here the pod definition has be defined.
+    metadata:
+      name: grafana
+      labels:
+        type: monitor
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 50m
+          limits:
+            memory: 200Mi
+            cpu: 100m

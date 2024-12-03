@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: httpd
+  name: vol-empty
+spec:
+  containers:
+  - image: httpd
+    name: mynginx1
+    volumeMounts:
+    - name: test-vol
+      mountPath: /home/devops
+  volumes:
+  - name: test-vol
+    emptyDir: {}

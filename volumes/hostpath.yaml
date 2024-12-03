@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: mynginx1
+  name: hostpath-test
+spec:
+  containers:
+  - image: nginx
+    name: mynginx1
+    ports:
+    - containerPort: 80
+  volumes:
+  - name: host-example
+    hostPath:
+      path: /tmp/devops
